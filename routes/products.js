@@ -2,7 +2,7 @@ const express = require('express')
 const res = require('express/lib/response')
 const router = express.Router()
 
-const ProductsService = require('./../services/product.service')
+const ProductsService = require('../services/product.services')
 const service = new ProductsService()
 
 router.get('/',async (req,res)=>{
