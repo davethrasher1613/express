@@ -2,6 +2,73 @@ const express = require('express')
 const res = require('express/lib/response')
 const router = express.Router()
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+const CategoriesService= require('./../services/categories.services')
+const validatorHandler =require('./../middlewares/validator.handler')
+const{createCategorieSchema,updateCategorieSchema,getCategorieSchema}=require('./../schemas/categories.schema')
+const service = new CategoriesService()
+
+router.get('/',async (req,res)=>{
+
+  const categories = await service.find()
+  res.send(categories)
+})
+
+router.get('/filter',(req,res)=>{
+  res.send("Soy un filter")
+})
+
+router.get('/:id',
+validatorHandler(getCategorieSchema, 'params'),
+async(req,res,next)=>{
+
+  try{
+
+    const{id}=req.params
+    const categories=await service.findone(id)
+    res.json(categories)
+
+  }catch(error){
+    next(error)
+  }
+}
+
+
+)
+
+router.post('/',
+
+validatorHandler(createCategorieSchema,'body'),
+async(req,res)=>{
+
+  const body= req.body;
+const newCategorie= await service.create(body)
+  res.status(201).json(newCategorie)
+
+
+  }
+  )
+
+  router.patch('/:id',
+  validatorHandler(createCategorieSchema, 'params')  ,
+  validatorHandler(updateCategorieSchema, 'body')  ,
+  async(req,res,next)=>{
+
+    try {
+      const{id}=req.params
+      const body= req.body;
+    const categories= await service.update(id,body)
+      res.json(categories)
+
+    }catch(error){
+    next(error)
+    }
+     }
+    )
+=======
+=======
+>>>>>>> b4a03771c0bec835499dbd84a0695677a4a7b9b6
 const categoriesService = require('./../services/categories.service')
 const service = new categoriesService()
 
@@ -40,6 +107,10 @@ router.patch('/:id',async (req,res)=>{
     })
   }
 })
+<<<<<<< HEAD
+>>>>>>> b4a03771c0bec835499dbd84a0695677a4a7b9b6
+=======
+>>>>>>> b4a03771c0bec835499dbd84a0695677a4a7b9b6
 
 router.delete('/:id', async(req,res)=>{
   const {id} = req.params
