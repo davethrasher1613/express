@@ -1,18 +1,15 @@
+
 const express = require('express')
 const res = require('express/lib/response')
 const router = express.Router()
 
-<<<<<<< HEAD
-const ProductsService = require('./../services/product.service')
-=======
-const ProductsService = require('../services/product.services')
->>>>>>> 70905c7063fb8f176f5faa2151ade79f931dd566
-const service = new ProductsService()
+const carritoCsService = require('../services/carritoCs.services')
+const service = new carritoCsService()
 
 router.get('/',async (req,res)=>{
 
-  const products = await service.find()
-  res.send(products)
+  const carritoCs = await service.find()
+  res.send(carritoCs)
 })
 
 router.get('/filter',(req,res)=>{
@@ -21,23 +18,23 @@ router.get('/filter',(req,res)=>{
 
 router.get('/:id',async (req,res)=>{
   const {id} = req.params
-  const products = await service.findOne(id)
+  const carritoCs = await service.findOne(id)
 
-  res.json(products)
+  res.json(carritoCs)
 })
 
 router.post('/',async (req,res)=>{
   const body = req.body
-  const newProduct = await service.create(body)
-  res.status(200).json(newProduct)
+  const newcarrito = await service.create(body)
+  res.status(200).json(newcarrito)
 })
 
 router.patch('/:id',async (req,res)=>{
   try {
     const {id} = req.params
     const body = req.body
-    const product = await service.update(id,body)
-    res.json(product)
+    const carritoCs = await service.update(id,body)
+    res.json(carritoCs)
   } catch (error) {
     res.status(404).json({
       message: error.message
