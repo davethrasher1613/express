@@ -11,11 +11,11 @@ class VehiculoService{
         for (let index = 0; index < limit; index++) {
             this.vehiculo.push({
                 id: faker.datatype.uuid(),
-                marca: faker.carName(),
-                modelo:faker.lastName(),
+                marca: faker.commerce.productName(),
+                modelo: faker.commerces.productName(),
                 año: faker.date(),
-                image:faker.image.cars(),
-                price:faker.image.imageUrl(),
+                image:faker.image.imageUrl(),
+                price:parseInt(faker.commerce.price(),10),
             })
             
         }
@@ -58,8 +58,8 @@ class VehiculoService{
     async delete(id){
         const index = this.vehiculo.findIndex(item => item.id === id)
         if(index === -1){
-            throw new Error('Vehiculo not found')
-        }
+            throw new Error('vehiculo not found')
+          }
         this.vehiculo.splice(index,1)
         return {id}
     }
