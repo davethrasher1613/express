@@ -8,9 +8,22 @@ const joi = require('joi');
  const city = joi.address().alphabetic().min(1);
  const state = joi.address().alphabetic().min(3);
  const country = joi.string().alphabetic().min(3);
-//  const date = joi.date();
-//  const total = joi.commerce().float().min(1);
+ const date = joi.date();
+ const total = joi.commerce().float().min(1);
 //____________________________________________
+
+const createEnvio = joi.object()({
+     id: id.require(),
+     name: name.require(),
+     email: email.require(),
+     phone: phone.require(),
+     address: address.require(),
+     city: city.require(),
+     state: state.require(),
+     country: country.require(),
+     date: require(date.require),
+     total: total.require(),
+})
 
 const findOneEnvio = joi.object()({
     id: id.require(),
@@ -26,7 +39,7 @@ const updateEnvio = joi.object()({
     country: country.require(),
 });
 
-const deleteEnvio = joi.object
-
-module.exports={findOneEnvio,updateEnvio,deleteEnvio}
+const deleteEnvio = joi.object()({
+    id: id.require(),
+})
 
