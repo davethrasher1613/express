@@ -9,10 +9,13 @@ class CategoriesService{
   generate(){
     const limit = 100;
     for (let index = 0; index < limit; index++) {
-      this.products.push({
+      this.categories.push({
 
         id: faker.datatype.uuid(),
-        name: faker.commerce.productName()
+        nombre: faker.commerce.nombreName(),
+       
+       
+        
       })
 
     }
@@ -28,8 +31,8 @@ class CategoriesService{
     return this.categories
   }
 
-  findOne(categoryId,productId){
-    return this.categories.find(item=>item.categoryId === categoryId, item2 =>item2.productId===productId)
+  findOne(id){
+    return this.categories.find(item=>item.id === id)
   }
 }
 
