@@ -3,6 +3,7 @@ const res = require('express/lib/response')
 const router = express.Router()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const CategoriesService= require('./../services/categories.services')
 const validatorHandler =require('./../middlewares/validator.handler')
 const{createCategorieSchema,updateCategorieSchema,getCategorieSchema}=require('./../schemas/categories.schema')
@@ -66,6 +67,8 @@ const newCategorie= await service.create(body)
      }
     )
 =======
+=======
+>>>>>>> b4a03771c0bec835499dbd84a0695677a4a7b9b6
 const categoriesService = require('./../services/categories.service')
 const service = new categoriesService()
 
@@ -104,6 +107,9 @@ router.patch('/:id',async (req,res)=>{
     })
   }
 })
+<<<<<<< HEAD
+>>>>>>> b4a03771c0bec835499dbd84a0695677a4a7b9b6
+=======
 >>>>>>> b4a03771c0bec835499dbd84a0695677a4a7b9b6
 
 router.delete('/:id', async(req,res)=>{
