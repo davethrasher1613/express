@@ -1,44 +1,65 @@
-const express = require('express')
-const res = require('express/lib/response')
-const VehiculoService = require('../services/vehiculo.services')
+const express=require('express');
+const faker=require('faker');
+const router=express.Router();
 
-const router = express.Router()
-const service = new VehiculoService()
+router.get('/', (req,res) => {
+    const vehiculos =  []
+    const {size} = req.query
+    const limit = size || 10
+    for (let index = 0; index < limit; index++) {
+        vehiculos.push({
+            id: faker.datatype.uuid(),
+            marca: faker.commerce.productName(),
+            modelo: faker.commerce.productName(),
+            //color: faker.color(),
+            image: faker.image.imageUrl(),
+        })
+    }
 
-router.get('/',async(req,res)=>{
-    const vehiculo = await service.find()
-    res.send (vehiculo)
+    res.json(vehiculos)
 })
 
-router.get('/:id',async (req,res)=>{
+router.get('/:id', (req, res) => {
     const {id} = req.params
-    const vehiculo = await service.findOne(id)
-    res.json(vehiculo)
-})
-
-router.post('/',async(req,res)=>{
-    const body = req.body
-    const newVehiculo = await service.create(body)
-    res.status(200).json(newVehiculo)
-})
-
-router.patch('/:id',async (req,res)=>{
-    try {
-        const {id} = req.params
-        const body = req.params
-        const vehiculos = await service.update(id,body)
-        res.json(vehiculos)
-    } catch (error) {
-        res.status(404)({
-            message: error.message
+    if (id===999) {
+        res.status(404).json({
+            message: 'not found',
+        })
+    } else {
+        res.json({
+            id,
+            name: "Carro 1",
+            price: 30000,
         })
     }
 })
 
-router.delete('/:id',async (req,res)=>{
-    const {id} = req.params
-    const rta = await service.delete(id)
-    res.json(rta)
+router.post('/', (req, res) => {
+    const body = req.body
+    res.status(201).json({
+        message: 'Vehiculo creado',
+        data: body
+    })
 })
 
-module.exports = router
+router.patch('/:id',(req,res)=>{
+    const {id}=req.params;
+    const body=req.body;
+    res.json({
+      message:'update',
+      data:body,
+      id,
+    });
+});
+  
+  
+router.delete('/:id',(req,res)=>{
+  const {id}=req.params;
+  res.json({
+    message:'deleted',
+    id,
+  });
+});
+  
+  
+module.exports=router;
